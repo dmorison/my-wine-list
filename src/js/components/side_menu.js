@@ -41,6 +41,8 @@ class SideMenu extends Component {
 	render() {
 		const openMenu = this.state.smOpen ? 'sm-open' : '';
 		const sticky = !this.props.pagePosition ? 'sticky' : '';
+		let filterCount = this.props.appFilterCount ? <p className="margin-bottom">count: {this.props.appFilterCount}</p> : "";
+
 
 		return (
 			<div className={`side-menu ${openMenu}`}>
@@ -57,6 +59,7 @@ class SideMenu extends Component {
 
 						<p className="margin-bottom">Total wines: {this.props.appTotalWines}</p>
 						<p className="margin-bottom">Currently in stock: {this.props.appInStockWines}</p>
+						<p className="margin-bottom">Average price: £{this.props.appAveragePrice}</p>
 
 						<form>
 							<p className="margin-bottom"><strong>Sort</strong></p>
@@ -81,6 +84,7 @@ class SideMenu extends Component {
 							</div>
 							
 							<p className="margin-bottom"><strong>Filter</strong></p>
+							{filterCount}
 							
 							<label>
 								Stock:
@@ -88,6 +92,7 @@ class SideMenu extends Component {
 									<option value="default">Select stock option</option>
 									<option value="true">In stock</option>
 									<option value="false">Out of stock</option>
+									<option value="multiple">More than 1</option>
 								</select>
 								{/*<i className="fas fa-chevron-down fa-lg"></i>*/}
 							</label>
@@ -119,6 +124,15 @@ class SideMenu extends Component {
 									<option value="Malbec">Malbec</option>
 								</select>
 								{/*<i className="fas fa-chevron-down fa-lg"></i>*/}
+							</label>
+
+							<label>
+								Average price:
+								<select id="average" onChange={this.initFilter}>
+									<option value="default">Select a value</option>
+									<option value="below">Below</option>
+									<option value="above">Above</option>
+								</select>
 							</label>
 
 							<button className="sm-form-btn" id="clear-filters" onClick={this.initFilter}>Clear Filters</button>
