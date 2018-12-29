@@ -1,0 +1,71 @@
+header {
+	width: 100%;
+	height: 250px;
+	box-sizing: border-box;
+	border-bottom: 8px solid #fff;
+
+	.header-bg {
+		width: 100%;
+		height: 100%;
+		background-image: url(../../images/wine-grapes.jpg);
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: 768px auto;
+		/* background-color: #93e5f2; */
+	}
+
+	@media only screen and (min-width: 768px) {
+		height: 300px;
+
+		.header-bg {
+			background-size: 992px auto;
+		}
+	}
+
+	@media only screen and (min-width: 992px) {
+		height: 320px;
+
+		.header-bg {
+			background-size: 1200px auto;
+		}
+	}
+
+	@media only screen and (min-width: 1200px) {
+		height: 412px;
+
+		.header-bg {
+			background-size: contain;
+		}
+	}
+
+	.top-bar {
+		display: block;
+		width: 100%;
+		position: fixed;
+		top: 0px;
+		z-index: 900;
+
+		padding: 20px;
+		background-color: transparent;
+
+		transition: all 0.3s;
+
+		h1 {
+			color: #fff;
+			font-size: 48px;
+
+			transition: 0.3s;
+		}
+
+		&.sticky {
+			background-color: #420c1a;
+			padding: 8px;
+			-webkit-box-shadow: 0 1px 15px rgba(0,0,0,.3);
+			box-shadow: 0 1px 15px rgba(0,0,0,.3);
+
+			h1 {
+				font-size: 32px;
+			}
+		}
+	}
+}

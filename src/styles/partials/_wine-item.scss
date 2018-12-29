@@ -1,0 +1,46 @@
+.wine-item {
+	width: 100%;
+	background-color: transparent;
+	padding: 10px;
+
+	@media only screen and (min-width: 768px) {
+		width: 381px; /* 2 columns */
+	}
+
+	@media only screen and (min-width: 992px) {
+		width: 328px; /* 3 columns */
+	}
+
+	@media only screen and (min-width: 1200px) {
+		width: 298px; /* 4 columns */
+	}
+
+	@media only screen and (min-width: 1514px) {
+		width: 302px; /* 5 columns */
+	}
+
+	.thumbnail {
+		text-align: center;
+		margin-bottom: 0px;
+		border: 0px;
+		border-top: 6px solid #fff;
+		transition: all .4s ease-in-out;
+
+		&:hover {
+			cursor: pointer;
+			background-color: #96a9ae;
+		}
+
+		&.type-Red { border-top-color: #b10015; }
+		&.type-White,
+		&.type-Sparkling { border-top-color: #fdce66; }
+	}
+
+	.thumbnail-img {
+		width: 86px;
+		height: auto;
+		border: 6px solid #420c1a;
+		border-radius: 6px;
+	}
+
+}

@@ -1,0 +1,110 @@
+.map-area {
+	width: 100%;
+	height: 160px;
+	border-top: 10px solid #fff;
+	border-radius: 6px 6px 0px 0px;
+
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+
+	position: relative;
+
+	&.type-Red { border-top-color: #b10015; }
+	&.type-White,
+	&.type-Sparkling { border-top-color: #fdce66; }
+
+	&.southafrica { background-image: url(../../images/southafrica.png); }
+	&.france { background-image: url(../../images/france.png); }
+	&.italy { background-image: url(../../images/italy.png); }
+	&.spain { background-image: url(../../images/spain.png); }
+	&.australia { background-image: url(../../images/australia.png); }
+	&.newzealand { background-image: url(../../images/newzealand.png); }
+
+	.sm-button-close {
+		display: block;
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		right: 10px;
+		padding-top: 12px;
+		transform: rotate(45deg);
+
+		&:hover { cursor: pointer; }
+
+		span {
+			display: block;
+			background-color: #420c1a;
+
+			&.cross-one {
+				width: 100%;
+				height: 5px;
+			}
+			&.cross-two {
+				width: 5px;
+				height: 30px;
+				position: absolute;
+				top: 0px;
+				left: 12px;
+			}
+		}
+	}
+}
+
+.modal-inner {
+	padding: 20px;
+	position: relative;
+	top: -80px;
+	margin-bottom: -80px;
+
+	h4 {
+		font-size: 26px;
+		font-weight: bold;
+		margin-bottom: 4px;
+	}
+
+	h3 {
+		margin-bottom: 12px;
+		line-height: 30px;
+	}
+
+	.modal-inner-head {
+		margin-left: -6px;
+		margin-bottom: 14px;
+
+		> img {
+			float: left;
+			border: 6px solid #fff;
+			border-radius: 6px;
+		}
+
+		> div {
+			float: left;
+			padding-left: 16px;
+			margin-top: 80px;
+
+			p {
+				font-size: 16px;
+
+				span { font-size: 20px; }
+			}
+		}
+
+		.star-rating {
+			img {
+				width: 26px;
+				display: inline;
+			}
+		}
+	}
+
+	table {
+		margin-top: 20px;
+
+		td {
+			&:first-child { padding-right: 8px; }
+		}
+	}
+
+}
+
