@@ -120,12 +120,16 @@ class App extends Component {
 			
 			let filteredWines = [];
 			let appFilterParams = this.state.filterParams;
+			console.log(appFilterParams);
 
 			Object.keys(appFilterParams).forEach(key => {
 				if (appFilterParams[key].value) {
+					console.log(filteredWines);
 					if (filteredWines.length < 1) {
+						console.log(filteredWines.length);
 
 						if (key === "stock") {
+							console.log("stock");
 							if (appFilterParams[key].value === "true") {
 								filteredWines = wineArray.filter(wine => wine[appFilterParams[key].catId] > 0);
 							} else if (appFilterParams[key].value === "multiple") {
@@ -134,6 +138,7 @@ class App extends Component {
 								filteredWines = wineArray.filter(wine => wine[appFilterParams[key].catId] < 1);
 							}
 						} else if (key === "average") {
+							console.log("average");
 							if (appFilterParams[key].value === "below") {
 								filteredWines = wineArray.filter(wine => parseFloat(wine[appFilterParams[key].catId]) < parseFloat(this.state.averagePrice));
 							} else {
@@ -144,9 +149,17 @@ class App extends Component {
 						}
 
 					} else {
-
-						filteredWines = filteredWines.filter(wine => wine[appFilterParams[key].catId] === appFilterParams[key].value);
-					
+						// when time allows this needs fixing to avoid repeating code
+						// need better structure to allow the average filter to be reached when filteredWines length is greater than 1 (line 128)
+						if (key === "average") {
+							if (appFilterParams[key].value === "below") {
+								filteredWines = filteredWines.filter(wine => parseFloat(wine[appFilterParams[key].catId]) < parseFloat(this.state.averagePrice));
+							} else {
+								filteredWines = filteredWines.filter(wine => parseFloat(wine[appFilterParams[key].catId]) >= parseFloat(this.state.averagePrice));
+							}
+						} else {
+							filteredWines = filteredWines.filter(wine => wine[appFilterParams[key].catId] === appFilterParams[key].value);
+						}
 					}
 				}
 			});
