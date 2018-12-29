@@ -30,6 +30,8 @@ class App extends Component {
 			initRange: '!A1:O20',
 			totalWines: 0,
 			inStockWines: 0,
+			filterCount: null,
+			averagePrice: 0,
 			hideLoadMore: false,
 			sortParams: null,
 			numFilters: 0,
@@ -44,6 +46,10 @@ class App extends Component {
 				},
 				type: {
 					catId: 6,
+					value: null
+				},
+				average: {
+					catId: 12,
 					value: null
 				}
 			}
@@ -105,6 +111,7 @@ class App extends Component {
 			}
 			
 			this.setState({
+				filterCount: null,
 				wines: sortWineArray,
 				selectedWine: sortWineArray[0]
 			}); // local development added function
@@ -121,8 +128,16 @@ class App extends Component {
 						if (key === "stock") {
 							if (appFilterParams[key].value === "true") {
 								filteredWines = wineArray.filter(wine => wine[appFilterParams[key].catId] > 0);
+							} else if (appFilterParams[key].value === "multiple") {
+								filteredWines = wineArray.filter(wine => wine[appFilterParams[key].catId] > 1);
 							} else {
 								filteredWines = wineArray.filter(wine => wine[appFilterParams[key].catId] < 1);
+							}
+						} else if (key === "average") {
+							if (appFilterParams[key].value === "below") {
+								filteredWines = wineArray.filter(wine => parseFloat(wine[appFilterParams[key].catId]) < parseFloat(this.state.averagePrice));
+							} else {
+								filteredWines = wineArray.filter(wine => parseFloat(wine[appFilterParams[key].catId]) >= parseFloat(this.state.averagePrice));
 							}
 						} else {
 							filteredWines = wineArray.filter(wine => wine[appFilterParams[key].catId] === appFilterParams[key].value);
@@ -141,6 +156,7 @@ class App extends Component {
 			}
 
 			this.setState({
+				filterCount: filteredWines.length,
 				wines: filteredWines,
 				selectedWine: filteredWines[0]
 			}); // local development added function
@@ -169,9 +185,11 @@ class App extends Component {
 				let totals = wines[0];
 				let appTotalWines = totals[14];
 				let appInStockWines = totals[13];
+				let appAveragePrice = totals[12];
 				this.setState({
 					totalWines: appTotalWines,
-					inStockWines: appInStockWines
+					inStockWines: appInStockWines,
+					averagePrice: appAveragePrice
 				});
 
 				wines.splice(0, 2);
@@ -205,7 +223,8 @@ class App extends Component {
 
 			this.setState({
 				filterParams: appFilterParams,
-				numFilters: 0
+				numFilters: 0,
+				hideLoadMore: false
 			}, () => this.getSheetsData());
 
 		} else {
@@ -227,7 +246,8 @@ class App extends Component {
 
 			this.setState({
 				filterParams: appFilterParams,
-				numFilters: numberFilters
+				numFilters: numberFilters,
+				hideLoadMore: true
 			}, () => this.getSheetsData());
 
 		}
@@ -406,6 +426,8 @@ class App extends Component {
 	      		appInStockWines={this.state.inStockWines}
 	      		onFilterSelect={filterParam => this.handleFilter(filterParam)}
 	      		onSortSelect={sortParam => this.handleSort(sortParam)}
+	      		appFilterCount={this.state.filterCount}
+	      		appAveragePrice={this.state.averagePrice}
 	      	/>
 	      	<MainHeader pagePosition={this.state.topOfPage} />
 	      	<main className="page-wrap">
