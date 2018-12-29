@@ -368,8 +368,13 @@ class App extends Component {
 	  	country = country.toLowerCase();
 	  	country = country.replace(/\s+/g, '');
 
+	  	let purchased = null;
+	  	if (this.state.selectedWine[11] !== '') {
+	  		purchased = <tr><td>Purchased:</td><td>{this.state.selectedWine[11]}</td></tr>;
+	  	}
+
 	  	let otherInfo = null;
-	  	if (this.state.selectedWine[15] !== '') {
+	  	if (this.state.selectedWine[15] !== undefined) {
 	  		otherInfo = <tr><td>Other info:</td><td>{this.state.selectedWine[15]}</td></tr>;
 	  	}
 
@@ -399,10 +404,7 @@ class App extends Component {
 
 						<table>
 							<tbody>
-								<tr>
-									<td>Purchased:</td>
-									<td>{this.state.selectedWine[11]}</td>
-								</tr>
+								{purchased}
 								<tr>
 									<td>Price:</td>
 									<td>&pound; {this.state.selectedWine[12]}</td>
