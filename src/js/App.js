@@ -120,16 +120,12 @@ class App extends Component {
 			
 			let filteredWines = [];
 			let appFilterParams = this.state.filterParams;
-			console.log(appFilterParams);
 
 			Object.keys(appFilterParams).forEach(key => {
 				if (appFilterParams[key].value) {
-					console.log(filteredWines);
 					if (filteredWines.length < 1) {
-						console.log(filteredWines.length);
 
 						if (key === "stock") {
-							console.log("stock");
 							if (appFilterParams[key].value === "true") {
 								filteredWines = wineArray.filter(wine => wine[appFilterParams[key].catId] > 0);
 							} else if (appFilterParams[key].value === "multiple") {
@@ -138,7 +134,6 @@ class App extends Component {
 								filteredWines = wineArray.filter(wine => wine[appFilterParams[key].catId] < 1);
 							}
 						} else if (key === "average") {
-							console.log("average");
 							if (appFilterParams[key].value === "below") {
 								filteredWines = wineArray.filter(wine => parseFloat(wine[appFilterParams[key].catId]) < parseFloat(this.state.averagePrice));
 							} else {
@@ -227,7 +222,6 @@ class App extends Component {
 	handleFilter(filterBy) {
 		if (!filterBy) {
 
-			console.log("clear filters");
 			let appFilterParams = this.state.filterParams;
 			
 			Object.keys(appFilterParams).forEach(key => {
@@ -242,7 +236,6 @@ class App extends Component {
 
 		} else {
 
-			console.log(filterBy);
 			let filterCat = filterBy[0];
 			let filterValue = filterBy[1];
 
