@@ -27,7 +27,7 @@ class App extends Component {
 			show: false,
 			topOfPage: true,
 			currPage: 20,
-			initRange: '!A1:O20',
+			initRange: '!A1:P20',
 			totalWines: 0,
 			inStockWines: 0,
 			filterCount: null,
@@ -92,7 +92,7 @@ class App extends Component {
 
 	handlePageNumber() {
 		let loadWines = this.state.currPage + 8;
-		let newRange = '!A1:O' + loadWines.toString();
+		let newRange = '!A1:P' + loadWines.toString();
 		this.setState({ currPage: loadWines }, () => this.getSheetsData(newRange));
 		if (loadWines >= this.state.totalWines) {
 			this.setState({ hideLoadMore: true });
@@ -368,6 +368,12 @@ class App extends Component {
 	  	country = country.toLowerCase();
 	  	country = country.replace(/\s+/g, '');
 
+	  	let otherInfo = null;
+	  	if (this.state.selectedWine[15] !== '') {
+	  		otherInfo = <tr><td>Other info:</td><td>{this.state.selectedWine[15]}</td></tr>;
+	  	}
+
+
   		activeWine = (
   			<Modal show={this.state.show} onHide={this.handleClose}>
   				<div className={`map-area type-${this.state.selectedWine[0]} ${country}`}>
@@ -405,6 +411,7 @@ class App extends Component {
 									<td>Date:</td>
 									<td>{this.state.selectedWine[10]}</td>
 								</tr>
+								{otherInfo}
 							</tbody>
 						</table>
 					</div>
