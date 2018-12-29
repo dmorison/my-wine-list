@@ -121,9 +121,11 @@ class App extends Component {
 			let filteredWines = [];
 			let appFilterParams = this.state.filterParams;
 
+			let counter = false;
 			Object.keys(appFilterParams).forEach(key => {
 				if (appFilterParams[key].value) {
-					if (filteredWines.length < 1) {
+					// console.log(filteredWines);
+					if (filteredWines.length < 1 && !counter) {
 
 						if (key === "stock") {
 							if (appFilterParams[key].value === "true") {
@@ -143,6 +145,8 @@ class App extends Component {
 							filteredWines = wineArray.filter(wine => wine[appFilterParams[key].catId] === appFilterParams[key].value);
 						}
 
+						counter = true;
+
 					} else {
 						// when time allows this needs fixing to avoid repeating code
 						// need better structure to allow the average filter to be reached when filteredWines length is greater than 1 (line 128)
@@ -156,6 +160,7 @@ class App extends Component {
 							filteredWines = filteredWines.filter(wine => wine[appFilterParams[key].catId] === appFilterParams[key].value);
 						}
 					}
+					// console.log(filteredWines);
 				}
 			});
 
